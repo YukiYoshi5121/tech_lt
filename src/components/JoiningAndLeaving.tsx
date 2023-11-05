@@ -93,31 +93,64 @@ const get_organized = (origin:any[][]) => {
 // Filter
 const get_filterd = (fdata:any[][], group_j:any[], group_b:any[], group_s:any[], group_k:any[]) => {
 
+  //console.log('filterd');
+  let filterd:any[] = fdata;
   // 事業本部
-  let filterd = ( group_j.length == 0 ) ? fdata : 
-  fdata.filter((el:any) => {
-    return ( group_j.includes(el[2]) )
-  });
+  if(group_j.length != 0){
+    if( group_j.length == 1 && group_j.includes('---')){
+      filterd = filterd.filter((el:any) => {
+        return !( el[2] != '' && el[4] == '' && el[6] == '' && el[8] == '' )
+      });
+    }
+    else {
+      filterd = filterd.filter((el:any) => {
+        return ( group_j.includes(el[2]) )
+      });
+    }
+  }
+  //console.log(filterd);
   // 部署
-  filterd = ( group_b.length == 0 ) ? filterd : 
-    ( group_b.length == 1 && group_b.includes('---')) ? 
-        filterd.filter((el:any) => {
-          return ( el[4] == '' && el[6] == '' && el[8] == '' )
-        }) :
-        filterd.filter((el:any) => {
-          return ( group_b.includes(el[4]) )
-        }
-    );
+  if(group_b.length != 0){
+    if( group_b.length == 1 && group_b.includes('---')){
+      filterd = filterd.filter((el:any) => {
+        return !( el[4] != '' && el[6] == '' && el[8] == '' )
+      });
+    }
+    else {
+      filterd = filterd.filter((el:any) => {
+        return ( group_b.includes(el[4]) )
+      });
+    }
+  }
+  //console.log(filterd);
   // 室
-  filterd = ( group_s.length == 0 ) ? filterd : 
-  filterd.filter((el:any) => {
-    return ( group_s.includes(el[6]) )
-  });
+  if(group_s.length != 0){
+    if( group_s.length == 1 && group_s.includes('---')){
+      filterd = filterd.filter((el:any) => {
+        return !( el[6] != '' && el[8] == '' )
+      });
+    }
+    else {
+      filterd = filterd.filter((el:any) => {
+        return ( group_s.includes(el[6]) )
+      });
+    }
+  }
+  //console.log(filterd);
   // 課
-  filterd = ( group_k.length == 0 ) ? filterd : 
-  filterd.filter((el:any) => {
-    return ( group_k.includes(el[8]) )
-  });
+  if(group_k.length != 0){
+    if( group_k.length == 1 && group_k.includes('---')){
+      filterd = filterd.filter((el:any) => {
+        return !( el[6] == '' && el[8] != '' )
+      });
+    }
+    else {
+      filterd = filterd.filter((el:any) => {
+        return ( group_k.includes(el[8]) )
+      });
+    }
+  }
+  //console.log(filterd);
 
   return filterd.length === 0 ? [] : filterd;
 }
@@ -294,14 +327,16 @@ const Graph = () => {
   const groups_bu_all:any[]    = Array.from(new Set(temp[10]));   // 部署
   const groups_shitu_all:any[] = Array.from(new Set(temp[12]));   // 室
   const groups_ka_all:any[]    = Array.from(new Set(temp[14]));   // 課
-  groups_bu_all.unshift('---'); // そのままだと多いので一旦部署だけで搾れるようにする
-  //groups_shitu_all.unshift('---');
-  //groups_ka_all.unshift('---');
+
+  groups_jigyo_all.unshift('---');
+  groups_bu_all.unshift('---');
+  groups_shitu_all.unshift('---');
+  groups_ka_all.unshift('---');
 
   const [selectedGroupsJ, setSelectedGroupsJ] = useState<any[]>([]);
   const [selectedGroupsB, setSelectedGroupsB] = useState<any[]>(['---']);
-  const [selectedGroupsS, setSelectedGroupsS] = useState<any[]>([]);
-  const [selectedGroupsK, setSelectedGroupsK] = useState<any[]>([]);
+  const [selectedGroupsS, setSelectedGroupsS] = useState<any[]>(['---']);
+  const [selectedGroupsK, setSelectedGroupsK] = useState<any[]>(['---']);
 
   // おおまかに調整
   const dataOrganized = get_organized(dataOrigin);
