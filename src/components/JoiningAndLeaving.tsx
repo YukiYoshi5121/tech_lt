@@ -93,64 +93,59 @@ const get_organized = (origin:any[][]) => {
 // Filter
 const get_filterd = (fdata:any[][], group_j:any[], group_b:any[], group_s:any[], group_k:any[]) => {
 
-  //console.log('filterd');
   let filterd:any[] = fdata;
   // 事業本部
   if(group_j.length != 0){
-    if( group_j.length == 1 && group_j.includes('---')){
+    if( group_j.includes('---')){
       filterd = filterd.filter((el:any) => {
         return !( el[2] != '' && el[4] == '' && el[6] == '' && el[8] == '' )
       });
     }
-    else {
+    if( group_j.length > 1 || !group_j.includes('---') ){
       filterd = filterd.filter((el:any) => {
         return ( group_j.includes(el[2]) )
       });
     }
   }
-  //console.log(filterd);
   // 部署
   if(group_b.length != 0){
-    if( group_b.length == 1 && group_b.includes('---')){
+    if( group_b.includes('---')){
       filterd = filterd.filter((el:any) => {
         return !( el[4] != '' && el[6] == '' && el[8] == '' )
       });
     }
-    else {
+    if( group_b.length > 1 || !group_b.includes('---') ){
       filterd = filterd.filter((el:any) => {
         return ( group_b.includes(el[4]) )
       });
     }
   }
-  //console.log(filterd);
   // 室
   if(group_s.length != 0){
-    if( group_s.length == 1 && group_s.includes('---')){
+    if( group_s.includes('---')){
       filterd = filterd.filter((el:any) => {
         return !( el[6] != '' && el[8] == '' )
       });
     }
-    else {
+    if( group_s.length > 1 || !group_s.includes('---') ){
       filterd = filterd.filter((el:any) => {
         return ( group_s.includes(el[6]) )
       });
     }
   }
-  //console.log(filterd);
   // 課
   if(group_k.length != 0){
-    if( group_k.length == 1 && group_k.includes('---')){
+    if( group_k.includes('---')){
       filterd = filterd.filter((el:any) => {
         return !( el[6] == '' && el[8] != '' )
       });
     }
-    else {
+    if( group_k.length > 1 || !group_k.includes('---') ){
       filterd = filterd.filter((el:any) => {
         return ( group_k.includes(el[8]) )
       });
     }
   }
-  //console.log(filterd);
 
   return filterd.length === 0 ? [] : filterd;
 }
@@ -197,23 +192,22 @@ const get_data_for_graph = (fdata:any[][]) => {
   }
 
   // グラフ用にJson整形
-  let datasets:any = [],
+  let datasetsA:any = [],
       datasetsB:any = [];
-//  let seriesColor = ['red','blue','green',];
   let seriesColor = ['red','orange','yellow','lime','green','teal','cyan',
                   'blue','indigo','violet','purple','fuchsia','pink',];
   let gdataA = {
     labels: label_year,
-    datasets: datasets
+    datasets: datasetsA
   };
   let gdataB = {
     labels: label_year,
     datasets: datasetsB
   };
-  let set_gdata:any = [gdataA, gdataB];
+  let set_gdata:any[] = [gdataA, gdataB];
 
   // データなしなら空データセットを返す
-  if(fdata3.length == 0 ) { return gdataA }
+  if(fdata3.length == 0 ) { return set_gdata }
 
   let count_affiliate = fdata3[0][0].length;
   label_affiliation = fdata3[0][1];
@@ -255,9 +249,8 @@ const get_data_for_graph = (fdata:any[][]) => {
       }
     )
   }
-  console.log('set_gdata');
-  console.log(set_gdata);
-  return gdataA;
+  set_gdata = [gdataA, gdataB];
+  return set_gdata;
 }
 // 所属先名をマージして取得
 const get_id = (array:any[]) => {
@@ -350,9 +343,9 @@ const Graph = () => {
   // テーブル用にJson形式に変換
   const dataForTable = get_data_for_table(dataFiltered, dataOrigin[0]);
   
-  console.log('dataFor');
-  console.log(dataForGraph);
-  console.log(dataForTable);
+  //console.log('dataFor');
+  //console.log(dataForGraph);
+  //console.log(dataForTable);
 
   return (
     <>
@@ -475,13 +468,13 @@ const Graph = () => {
           <Col numColSpan={1} numColSpanLg={3}>
             <Card decoration="top" decorationColor="indigo">
               <Text className="font-bold">ChartB</Text>
-              <Bar options={options} data={dataForGraph} height={200} />
+              <Bar options={options} data={dataForGraph[0]} height={200} />
             </Card>
           </Col>
           <Col numColSpan={1} numColSpanLg={3}>
             <Card decoration="top" decorationColor="indigo">
               <Text className="font-bold">ChartL</Text>
-              <Line options={options} data={dataForGraph} height={200} />
+              <Line options={options} data={dataForGraph[0]} height={200} />
             </Card>
           </Col>
 

@@ -23,6 +23,7 @@ const App = () => {
     <>
       <Title>Dashboard</Title>
       <Text>New job: fix Mr. Gluck&#39;s hazy TV, PDQ!</Text>
+      <Text><a href='https://www.tremor.so/' target='_blank'>https://www.tremor.so/</a></Text>
 
       <TabGroup className="mt-6">
         <TabList>
