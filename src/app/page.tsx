@@ -16,7 +16,6 @@ import {
 
 import JoiningAndLeaving from 'components/JoiningAndLeaving';
 import BarLineTable from 'components/BarLineTable';
-import AthleteTable from 'components/AthletesTable';
 
 // Main
 const App = () => {
