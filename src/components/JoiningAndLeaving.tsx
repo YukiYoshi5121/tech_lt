@@ -9,7 +9,6 @@ import { Card, Metric, Text } from "@tremor/react";
 import { Grid, Col, Flex } from "@tremor/react";
 import { MultiSelect, MultiSelectItem } from "@tremor/react";
 
-import SalesPeopleTable from "./SalesPeopleTable";
 import JandLTable from "./JandLTable";
 import CSVReader from "./CSVReader";
 import _ from 'lodash';
@@ -91,7 +90,7 @@ const get_organized = (origin:any[][]) => {
   return fdata;
 }
 
-// Filtered
+// Filter
 const get_filterd = (fdata:any[][], group_j:any[], group_b:any[], group_s:any[], group_k:any[]) => {
 
   // 事業本部
@@ -167,7 +166,9 @@ const get_data_for_graph = (fdata:any[][]) => {
   // グラフ用にJson整形
   let datasets:any = [],
       datasetsB:any = [];
-  let seriesColor = ['red','blue','green',];
+//  let seriesColor = ['red','blue','green',];
+  let seriesColor = ['red','orange','yellow','lime','green','teal','cyan',
+                  'blue','indigo','violet','purple','fuchsia','pink',];
   let gdataA = {
     labels: label_year,
     datasets: datasets
@@ -186,7 +187,7 @@ const get_data_for_graph = (fdata:any[][]) => {
   for(let j=0; j<count_affiliate; j++) { // jigyo
     let data_arrayA:any[] = [],
         data_arrayB:any[] = [];
-    for (let i=0; i<fdata3.length; i++) { //year     //    for (let i=fdata3.length-1; i>=0; i--) { //year
+    for (let i=0; i<fdata3.length; i++) { //year
       data_arrayA.push(fdata3[i][2][j]);
       data_arrayB.push(fdata3[i][3][j]);
     }
@@ -195,15 +196,16 @@ const get_data_for_graph = (fdata:any[][]) => {
   }
 
   for (let i=0; i<count_affiliate; i++) {
+    let tcolor = seriesColor[i%seriesColor.length];
     gdataA.datasets.push(
       {
         //type: graphType,
         label: label_affiliation[i],
         data: fdata4A[i],  // 年度末所属人数
-        backgroundColor: seriesColor[i%3],
-        borderColor: seriesColor[i%3],
-        pointBorderColor: seriesColor[i%3],
-        pointBackgroundColor: seriesColor[i%3],
+        backgroundColor: tcolor,
+        borderColor: tcolor,
+        pointBorderColor: tcolor,
+        pointBackgroundColor: tcolor,
         fill: false,
       }
     )
@@ -212,10 +214,10 @@ const get_data_for_graph = (fdata:any[][]) => {
         //type: graphType,
         label: label_affiliation[i],
         data: fdata4B[i],  // 年度内退職者数
-        backgroundColor: seriesColor[i%3],
-        borderColor: seriesColor[i%3],
-        pointBorderColor: seriesColor[i%3],
-        pointBackgroundColor: seriesColor[i%3],
+        backgroundColor: tcolor,
+        borderColor: tcolor,
+        pointBorderColor: tcolor,
+        pointBackgroundColor: tcolor,
         fill: false,
       }
     )

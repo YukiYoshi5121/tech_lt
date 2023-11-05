@@ -28,7 +28,7 @@ const App = () => {
         <TabList>
           <Tab>BarLineTable</Tab>
           <Tab>JoiningAndLeaving</Tab>
-          <Tab>Athletes</Tab>
+          <Tab>Tes</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>

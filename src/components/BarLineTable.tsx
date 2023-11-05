@@ -72,7 +72,6 @@ const get_tdata = (filedata:string[][], groups:string[], subgroups:string[]) => 
 const array_filter = (tdata:any, groups:any, subgroups:any) => {
   let filterd = groups.length == 0 ? tdata : 
   tdata.filter((el:any) => {
-    //return (groups.includes(el[1]) && subgroups.includes(el[2]))
     return ( groups.includes(el[1]) )
   });
 
@@ -90,20 +89,10 @@ const options = {
 const Graph = () => {
 
   const [dataForGraph, setDataForGraph] = useState<string[][]>([[]]);
-  //const [dataForTable, setDataForTable] = useState<any[]>([]);
 
   const inputDataOrigin = (forGraph) => {
     setDataForGraph(forGraph);
   }
-  /*
-  const inputDataTable = (forTable) => {
-    setDataForTable(forTable);
-  }
-  //console.log(dataForGraph);
-  //console.log(dataForTable);
-  */
-
-  //getTableData(dataRaw, setDataForTable);
   
   console.log('dataForGraph');
   console.log(dataForGraph);
@@ -113,15 +102,9 @@ const Graph = () => {
   let temp = JSON.stringify(dataForGraph) !== '[[]]' ? _.unzip(dataForGraph.slice(1)) : [[]];
   const groups_all:string[] = Array.from(new Set(temp[1]));      // 2行目以降の2列目転置
   const subgroups_all:string[] = Array.from(new Set(temp[2]));   // 2行目以降の3列目転置
-  groups_all.unshift('---');
   const [selectedGroups, setSelectedGroups] = useState<string[]>([]);
-  const [selectedSubGroups, setSelectedSubGroups] = useState<string[]>([]);
 
   const gdata = get_gdata(dataForGraph, selectedGroups, subgroups_all);
-  //const tdata = get_tdata(dataForGraph, selectedGroups, subgroups_all);
-  
-  //const isGroupsSelected = (tdata:any) =>
-  //  (selectedGroups.includes(tdata.datasets) || selectedGroups.length === 0);
 
   return (
     <>
