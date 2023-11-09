@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React from "react";
+import React from 'react';
 
 import 'chart.js/auto';
 
@@ -12,10 +12,12 @@ import {
   TabGroup,
   TabPanel,
   TabPanels,
-} from "@tremor/react";
+} from '@tremor/react';
 
-import JoiningAndLeaving from 'components/JoiningAndLeaving';
 import BarLineTable from 'components/BarLineTable';
+import JoiningAndLeaving from 'components/JoiningAndLeaving';
+import JoiningAndLeaving2 from 'components/JoiningAndLeavingTRMR';
+import JoiningAndLeaving3 from 'components/JoiningAndLeavingMUI';
 
 // Main
 const App = () => {
@@ -23,13 +25,17 @@ const App = () => {
     <>
       <Title>Dashboard</Title>
       <Text>New job: fix Mr. Gluck&#39;s hazy TV, PDQ!</Text>
-      <Text><a href='https://www.tremor.so/' target='_blank'>https://www.tremor.so/</a></Text>
+      <Text>
+        <a href='https://www.tremor.so/' target='_blank'>
+          https://www.tremor.so/
+        </a>
+      </Text>
 
-      <TabGroup className="mt-6">
+      <TabGroup className='mt-6'>
         <TabList>
           <Tab>BarLineTable</Tab>
           <Tab>JoiningAndLeaving</Tab>
-          <Tab>Tes</Tab>
+          <Tab>JoiningAndLeaving2</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
@@ -39,15 +45,12 @@ const App = () => {
             <JoiningAndLeaving />
           </TabPanel>
           <TabPanel>
-
+            <JoiningAndLeaving2 />
           </TabPanel>
-
         </TabPanels>
       </TabGroup>
     </>
-  )
+  );
 };
 
 export default App;
-
-
