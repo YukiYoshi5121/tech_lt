@@ -83,9 +83,9 @@ const styles = {
 const config = {
   delimiter: '	',
   header: false,
-}
+};
 
-export default function CSVReaderA({inputDataOrigin}) {
+export default function CSVReaderA({ inputDataOrigin }) {
   const { CSVReader } = useCSVReader();
   const [zoneHover, setZoneHover] = useState(false);
   const [removeHoverColor, setRemoveHoverColor] = useState(
@@ -129,7 +129,7 @@ export default function CSVReaderA({inputDataOrigin}) {
         event.preventDefault();
         setZoneHover(false);
       }}
-      config = {{
+      config={{
         delimiter: '	',
         header: false,
       }}

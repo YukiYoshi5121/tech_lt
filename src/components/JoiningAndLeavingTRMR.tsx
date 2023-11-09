@@ -24,6 +24,9 @@ import { get_data_for_graph_CJS } from './utils/GetDataForGraphCJS';
 // Table
 import { get_data_for_table } from './utils/GetDataForTable';
 
+// tremorのBarChartSample
+import { BarChartSample } from './chart/ChartSampleTRMR';
+
 // options
 const options: {} = {
   responsive: true,
@@ -245,48 +248,19 @@ const Graph = () => {
             </Flex>
           </Col>
 
-          <Col numColSpan={1} numColSpanLg={6}>
-            <Text className='font-bold'>所属別の年度末在籍者数</Text>
+          <Col numColSpan={1} numColSpanLg={3}>
+            <BarChartSample
+              dataForGraph={dataForGraph}
+              type={0}
+              name={'年度末の在籍者数'}
+            />
           </Col>
           <Col numColSpan={1} numColSpanLg={3}>
-            <Card decoration='top' decorationColor='indigo'>
-              <Bar
-                options={options}
-                data={dataForGraphChartJS[0]}
-                height={200}
-              />
-            </Card>
-          </Col>
-          <Col numColSpan={1} numColSpanLg={3}>
-            <Card decoration='top' decorationColor='indigo'>
-              <Line
-                options={options}
-                data={dataForGraphChartJS[0]}
-                height={200}
-              />
-            </Card>
-          </Col>
-
-          <Col numColSpan={1} numColSpanLg={6}>
-            <Text className='font-bold'>所属別の年度内退職者数</Text>
-          </Col>
-          <Col numColSpan={1} numColSpanLg={3}>
-            <Card decoration='top' decorationColor='indigo'>
-              <Bar
-                options={options}
-                data={dataForGraphChartJS[1]}
-                height={100}
-              />
-            </Card>
-          </Col>
-          <Col numColSpan={1} numColSpanLg={3}>
-            <Card decoration='top' decorationColor='indigo'>
-              <Line
-                options={options}
-                data={dataForGraphChartJS[1]}
-                height={100}
-              />
-            </Card>
+            <BarChartSample
+              dataForGraph={dataForGraph}
+              type={1}
+              name={'年度内の退職者数'}
+            />
           </Col>
 
           <Col numColSpan={1} numColSpanLg={6}>
