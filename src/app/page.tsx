@@ -17,7 +17,6 @@ import {
 import BarLineTable from 'components/BarLineTable';
 import JoiningAndLeaving from 'components/JoiningAndLeaving';
 import JoiningAndLeaving2 from 'components/JoiningAndLeavingTRMR';
-import JoiningAndLeaving3 from 'components/JoiningAndLeavingMUI';
 
 // Main
 const App = () => {
