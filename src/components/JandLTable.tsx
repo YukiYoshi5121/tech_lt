@@ -19,10 +19,8 @@ const JandLTable = ({ dataForTable }) => {
             <TableHeaderCell>年度</TableHeaderCell>
             <TableHeaderCell className='text-right'>事業本部名</TableHeaderCell>
             <TableHeaderCell className='text-right'>部署名</TableHeaderCell>
-            <TableHeaderCell className='text-right'>室名</TableHeaderCell>
-            <TableHeaderCell className='text-right'>課名</TableHeaderCell>
             <TableHeaderCell className='text-right'>
-              年度末の所属人数
+              年度末の在籍者数
             </TableHeaderCell>
             <TableHeaderCell className='text-right'>
               その年度の退職者数
@@ -38,8 +36,6 @@ const JandLTable = ({ dataForTable }) => {
               <TableCell className='text-right'>
                 {item.department_name}
               </TableCell>
-              <TableCell className='text-right'>{item.office_name}</TableCell>
-              <TableCell className='text-right'>{item.section_name}</TableCell>
               <TableCell className='text-right'>{item.count_end}</TableCell>
               <TableCell className='text-right'>{item.count_leave}</TableCell>
             </TableRow>

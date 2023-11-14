@@ -1,7 +1,8 @@
 // テーブル用
 export const get_data_for_table = (gdata: any[][], ori_header: any[]) => {
   let header: any[] = ori_header.slice(6);
-  header.push(['count_end', 'count_leave']);
+  header.push('count_end');
+  header.push('count_leave');
 
   // jsonObject用配列を作成
   let jsonObj: any = [];

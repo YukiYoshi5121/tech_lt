@@ -3,9 +3,8 @@
 import React, { useState } from 'react';
 
 import 'chart.js/auto';
-import { Bar, Line } from 'react-chartjs-2';
 
-import { Card, Metric, Text } from '@tremor/react';
+import { Card, Text } from '@tremor/react';
 import { Grid, Col, Flex } from '@tremor/react';
 import { MultiSelect, MultiSelectItem } from '@tremor/react';
 
@@ -26,31 +25,6 @@ import { get_data_for_table } from './utils/GetDataForTable';
 
 // tremorのBarChartSample
 import { BarChartSample } from './chart/ChartSampleTRMR';
-
-// options
-const options: {} = {
-  responsive: true,
-  scales: {
-    y: {
-      suggestedMin: 0,
-      ticks: {
-        stepSize: 1,
-      },
-    },
-  },
-  plugins: {
-    legend: {
-      position: 'right',
-      title: {
-        display: false,
-        text: '所属',
-      },
-      labels: {
-        tooltip: true,
-      },
-    },
-  },
-};
 
 // Main
 const Graph = () => {
@@ -106,13 +80,17 @@ const Graph = () => {
   return (
     <>
       <Card
-        className='max-w-screen-2xl mx-auto mt-4 mb-6 bg-blue-100'
+        className='max-w-screen-xl mx-auto mt-4 mb-6 bg-blue-100'
         decoration='top'
         decorationColor='indigo'
       >
         <Grid numItems={1} numItemsSm={6} numItemsLg={6} className='gap-2 '>
           <Col numColSpan={1} numColSpanLg={6}>
-            <Card decoration='top' decorationColor='indigo' className=''>
+            <Card
+              decoration='top'
+              decorationColor='indigo'
+              className='h-24 p-3'
+            >
               <Grid
                 numItems={1}
                 numItemsSm={4}
@@ -120,7 +98,7 @@ const Graph = () => {
                 className='gap-2 '
               >
                 <Col numColSpan={1} numColSpanLg={1}>
-                  <Text className='font-bold'>事業本部</Text>
+                  <Text className='font-bold'>事業 本部</Text>
                   <MultiSelect
                     className='max-w-full sm:max-w-xs'
                     value={selectedGroupsJ}
@@ -149,103 +127,12 @@ const Graph = () => {
                     ))}
                   </MultiSelect>
                 </Col>
+                <Col numColSpan={1} numColSpanLg={1}></Col>
                 <Col numColSpan={1} numColSpanLg={1}>
-                  <Text className='font-bold'>室</Text>
-                  <MultiSelect
-                    className='max-w-full sm:max-w-xs'
-                    value={selectedGroupsS}
-                    onValueChange={setSelectedGroupsS}
-                    placeholder='Select Groups...'
-                  >
-                    {groups_shitu_all.filter(Boolean).map((group, i) => (
-                      <MultiSelectItem key={i} value={group}>
-                        {group}
-                      </MultiSelectItem>
-                    ))}
-                  </MultiSelect>
-                </Col>
-                <Col numColSpan={1} numColSpanLg={1}>
-                  <Text className='font-bold'>課</Text>
-                  <MultiSelect
-                    className='max-w-full sm:max-w-xs'
-                    value={selectedGroupsK}
-                    onValueChange={setSelectedGroupsK}
-                    placeholder='Select Groups...'
-                  >
-                    {groups_ka_all.filter(Boolean).map((group, i) => (
-                      <MultiSelectItem key={i} value={group}>
-                        {group}
-                      </MultiSelectItem>
-                    ))}
-                  </MultiSelect>
+                  <CSVReader inputDataOrigin={inputDataOrigin} />
                 </Col>
               </Grid>
             </Card>
-          </Col>
-
-          <Col numColSpan={1} numColSpanLg={6}>
-            <Flex flexDirection='col'>
-              <Card decoration='top' decorationColor='indigo' className='h-20'>
-                <div className='flex space-x-2'>
-                  <Text className='font-bold'>
-                    事業
-                    <br />
-                    本部
-                  </Text>
-                  <MultiSelect
-                    className='max-w-full sm:max-w-xs'
-                    value={selectedGroupsJ}
-                    onValueChange={setSelectedGroupsJ}
-                    placeholder='Select Groups...'
-                  >
-                    {groups_jigyo_all.filter(Boolean).map((group, i) => (
-                      <MultiSelectItem key={i} value={group}>
-                        {group}
-                      </MultiSelectItem>
-                    ))}
-                  </MultiSelect>
-                  <Text className='font-bold'>部署</Text>
-                  <MultiSelect
-                    className='max-w-full sm:max-w-xs'
-                    value={selectedGroupsB}
-                    onValueChange={setSelectedGroupsB}
-                    placeholder='Select Groups...'
-                  >
-                    {groups_bu_all.filter(Boolean).map((group, i) => (
-                      <MultiSelectItem key={i} value={group}>
-                        {group}
-                      </MultiSelectItem>
-                    ))}
-                  </MultiSelect>
-                  <Text className='font-bold'>室</Text>
-                  <MultiSelect
-                    className='max-w-full sm:max-w-xs'
-                    value={selectedGroupsS}
-                    onValueChange={setSelectedGroupsS}
-                    placeholder='Select Groups...'
-                  >
-                    {groups_shitu_all.filter(Boolean).map((group, i) => (
-                      <MultiSelectItem key={i} value={group}>
-                        {group}
-                      </MultiSelectItem>
-                    ))}
-                  </MultiSelect>
-                  <Text className='font-bold'>課</Text>
-                  <MultiSelect
-                    className='max-w-full sm:max-w-xs'
-                    value={selectedGroupsK}
-                    onValueChange={setSelectedGroupsK}
-                    placeholder='Select Groups...'
-                  >
-                    {groups_ka_all.filter(Boolean).map((group, i) => (
-                      <MultiSelectItem key={i} value={group}>
-                        {group}
-                      </MultiSelectItem>
-                    ))}
-                  </MultiSelect>
-                </div>
-              </Card>
-            </Flex>
           </Col>
 
           <Col numColSpan={1} numColSpanLg={3}>
@@ -264,16 +151,11 @@ const Graph = () => {
           </Col>
 
           <Col numColSpan={1} numColSpanLg={6}>
-            <Text className='font-bold'>データテーブル</Text>
-          </Col>
-          <Col numColSpan={1} numColSpanLg={6}>
             <Card decoration='top' decorationColor='indigo'>
-              <Text className='font-bold'>Table</Text>
+              <Text className='font-bold text-tremor-title'>
+                データテーブル
+              </Text>
               <JandLTable dataForTable={dataForTable} />
-            </Card>
-
-            <Card decoration='top' decorationColor='indigo'>
-              <CSVReader inputDataOrigin={inputDataOrigin} />
             </Card>
           </Col>
         </Grid>

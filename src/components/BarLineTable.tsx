@@ -108,48 +108,59 @@ const Graph = () => {
   return (
     <>
       <Card
-        className='max-w-7xl mx-auto mt-4 mb-6 bg-blue-100'
+        className='max-w-screen-xl mx-auto mt-4 mb-6 bg-blue-100'
         decoration='top'
         decorationColor='indigo'
       >
-        <Grid numItems={1} numItemsSm={5} numItemsLg={5} className='gap-2 '>
-          <Col numColSpan={1} numColSpanLg={2}>
+        <Grid numItems={1} numItemsSm={6} numItemsLg={6} className='gap-2 '>
+          <Col numColSpan={1} numColSpanLg={6}>
+            <Card
+              decoration='top'
+              decorationColor='indigo'
+              className='h-24 p-3'
+            >
+              <Grid
+                numItems={1}
+                numItemsSm={4}
+                numItemsLg={4}
+                className='gap-2 '
+              >
+                <Col numColSpan={1} numColSpanLg={3}>
+                  <Text className='font-bold'>Groups</Text>
+                  <MultiSelect
+                    className='max-w-full sm:max-w-xs'
+                    value={selectedGroups}
+                    onValueChange={setSelectedGroups}
+                    placeholder='Select Groups...'
+                  >
+                    {groups_all.map((group, i) => (
+                      <MultiSelectItem key={i} value={group}>
+                        {group}
+                      </MultiSelectItem>
+                    ))}
+                  </MultiSelect>
+                </Col>
+                <Col numColSpan={1} numColSpanLg={1}>
+                  <CSVReader inputDataOrigin={inputDataOrigin} />
+                </Col>
+              </Grid>
+            </Card>
+          </Col>
+
+          <Col numColSpan={1} numColSpanLg={3}>
             <Card decoration='top' decorationColor='indigo'>
               <Text className='font-bold'>ChartBar</Text>
-              <Bar options={options} data={gdata} height={330} />
+              <Bar options={options} data={gdata} height={200} />
             </Card>
           </Col>
-          <Col numColSpan={1} numColSpanLg={2}>
+          <Col numColSpan={1} numColSpanLg={3}>
             <Card decoration='top' decorationColor='indigo'>
               <Text className='font-bold'>ChartLine</Text>
-              <Line options={options} data={gdata} height={330} />
+              <Line options={options} data={gdata} height={200} />
             </Card>
           </Col>
-          <Col numColSpan={1} numColSpanLg={1}>
-            <Flex flexDirection='col'>
-              <Card decoration='top' decorationColor='indigo' className='h-80'>
-                <Text className='font-bold'>Groups</Text>
-                <MultiSelect
-                  className='max-w-full sm:max-w-xs'
-                  value={selectedGroups}
-                  onValueChange={setSelectedGroups}
-                  placeholder='Select Groups...'
-                >
-                  {groups_all.map((group, i) => (
-                    <MultiSelectItem key={i} value={group}>
-                      {group}
-                    </MultiSelectItem>
-                  ))}
-                </MultiSelect>
-              </Card>
 
-              <Card decoration='top' decorationColor='indigo' className='mt-4'>
-                <CSVReader inputDataOrigin={inputDataOrigin} />
-              </Card>
-            </Flex>
-          </Col>
-
-          <Col numColSpan={1} numColSpanLg={5}>
+          <Col numColSpan={1} numColSpanLg={6}>
             <Card decoration='top' decorationColor='indigo'>
               <Text className='font-bold'>Sales</Text>
               <SalesPeopleTable inputDataTable={gdata} />

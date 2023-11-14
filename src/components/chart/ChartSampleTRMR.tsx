@@ -71,6 +71,7 @@ export const BarChartSample = ({ dataForGraph, type, name }) => {
             yAxisWidth={30}
             enableLegendSlider={value}
             showAnimation={true}
+            allowDecimals={false}
           />
         </div>
         <div className='p-3 bg-gray-50 border-t flex items-center space-x-3 rounded-b-lg'>

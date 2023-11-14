@@ -34,14 +34,10 @@ const App = () => {
         <TabList>
           <Tab>BarLineTable</Tab>
           <Tab>JoiningAndLeaving</Tab>
-          <Tab>JoiningAndLeaving2</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
             <BarLineTable />
-          </TabPanel>
-          <TabPanel>
-            <JoiningAndLeaving />
           </TabPanel>
           <TabPanel>
             <JoiningAndLeaving2 />
