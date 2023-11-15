@@ -13,7 +13,6 @@ import {
 } from '@tremor/react';
 
 import BarLineTable from 'components/BarLineTable';
-import JoiningAndLeaving from 'components/JoiningAndLeaving';
 import JoiningAndLeaving2 from 'components/JoiningAndLeavingTRMR';
 
 // Main
