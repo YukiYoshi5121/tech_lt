@@ -2,8 +2,6 @@
 
 import React, { useState } from 'react';
 
-import 'chart.js/auto';
-
 import { Card, Text } from '@tremor/react';
 import { Grid, Col, Flex } from '@tremor/react';
 import { MultiSelect, MultiSelectItem } from '@tremor/react';
@@ -26,6 +24,10 @@ import { get_data_for_table } from './utils/GetDataForTable';
 // tremorのBarChartSample
 import { BarChartSample } from './chart/ChartSampleTRMR';
 
+function uniqString(array: string[]) {
+  return Array.from(new Set(array));
+}
+
 // Main
 const Graph = () => {
   const [dataOrigin, setDataOrigin] = useState<any[][]>([[]]);
@@ -38,43 +40,45 @@ const Graph = () => {
   // 絞り込み用
   let temp =
     JSON.stringify(dataOrigin) !== '[[]]' ? _.unzip(dataOrigin.slice(1)) : [[]];
+  const groups_yr_all: any[] = Array.from(new Set(temp[6])); //
   const groups_jigyo_all: any[] = Array.from(new Set(temp[8])); // 事業本部
   const groups_bu_all: any[] = Array.from(new Set(temp[10])); // 部署
-  const groups_shitu_all: any[] = Array.from(new Set(temp[12])); // 室
-  const groups_ka_all: any[] = Array.from(new Set(temp[14])); // 課
 
   // '---': 選択すると、そのレベルの合算が表示されなくなる
   groups_jigyo_all.unshift('---');
   groups_bu_all.unshift('---');
-  groups_shitu_all.unshift('---');
-  groups_ka_all.unshift('---');
 
+  const [selectedGroupsY, setSelectedGroupsY] = useState<any[]>([]);
   const [selectedGroupsJ, setSelectedGroupsJ] = useState<any[]>([]);
   const [selectedGroupsB, setSelectedGroupsB] = useState<any[]>(['---']);
-  const [selectedGroupsS, setSelectedGroupsS] = useState<any[]>(['---']);
-  const [selectedGroupsK, setSelectedGroupsK] = useState<any[]>(['---']);
 
   // ファイル入力からおおまかに調整
   const dataOrganized: any[][] = get_organized(dataOrigin);
+  //console.log('dataOrigin');
+  //console.log(dataOrigin);
+  //console.log('dataOrganized');
+  //console.log(dataOrganized);
 
   // フィルタリング
   const dataFiltered: any[] = get_filterd(
     dataOrganized,
     selectedGroupsJ,
     selectedGroupsB,
-    selectedGroupsS,
-    selectedGroupsK
+    selectedGroupsY
   );
+  //console.log('dataFiltered');
+  //console.log(dataFiltered);
 
   // グラフ用に整形
   const dataForGraph: any[] = get_data_for_graph(dataFiltered);
-  const dataForGraphChartJS: any[] = get_data_for_graph_CJS(dataForGraph);
+  //console.log('dataForGraph');
+  //console.log(dataForGraph);
 
   // テーブル用にJson形式に変換
   const dataForTable: any = get_data_for_table(dataFiltered, dataOrigin[0]);
-
-  //console.log('dataFor');
-  //console.log(dataForGraphChartJS);
+  // 年度s
+  const fiscal_years: string[] = uniqString(_.unzip(dataForGraph)[0]).reverse();
+  //console.log('dataForTable');
   //console.log(dataForTable);
 
   return (
@@ -98,7 +102,7 @@ const Graph = () => {
                 className='gap-2 '
               >
                 <Col numColSpan={1} numColSpanLg={1}>
-                  <Text className='font-bold'>事業 本部</Text>
+                  <Text className='font-bold'>事業本部</Text>
                   <MultiSelect
                     className='max-w-full sm:max-w-xs'
                     value={selectedGroupsJ}
@@ -139,14 +143,14 @@ const Graph = () => {
             <BarChartSample
               dataForGraph={dataForGraph}
               type={0}
-              name={'年度末の在籍者数'}
+              name={'在籍者(年度末時点)'}
             />
           </Col>
           <Col numColSpan={1} numColSpanLg={3}>
             <BarChartSample
               dataForGraph={dataForGraph}
               type={1}
-              name={'年度内の退職者数'}
+              name={'退職者(年度末時点)'}
             />
           </Col>
 
@@ -155,7 +159,10 @@ const Graph = () => {
               <Text className='font-bold text-tremor-title'>
                 データテーブル
               </Text>
-              <JandLTable dataForTable={dataForTable} />
+              <JandLTable
+                dataForTable={dataForTable}
+                fiscalYears={fiscal_years}
+              />
             </Card>
           </Col>
         </Grid>

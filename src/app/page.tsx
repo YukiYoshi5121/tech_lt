@@ -2,8 +2,6 @@
 
 import React from 'react';
 
-import 'chart.js/auto';
-
 import {
   Text,
   Title,

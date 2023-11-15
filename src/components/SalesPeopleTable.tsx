@@ -1,9 +1,6 @@
 'use client';
 
-import { InformationCircleIcon } from '@heroicons/react/solid';
 import React, { useState } from 'react';
-
-import 'chart.js/auto';
 
 import { MultiSelect, MultiSelectItem } from '@tremor/react';
 import {

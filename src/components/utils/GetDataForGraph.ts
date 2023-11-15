@@ -11,21 +11,25 @@ export const get_data_for_graph: (fdata: string[][]) => any[][] = (fdata) => {
 
     fdatarow.push(temp[0]);
     fdatarow.push(get_id(temp));
-    fdatarow.push(temp[9]);
-    fdatarow.push(temp[10]);
+    fdatarow.push(get_name(temp));
+    fdatarow.push(temp[5]);
+    fdatarow.push(temp[6]);
 
     fdata2.push(fdatarow);
   }
-  console.log('fdata2fdata2fdata2');
-  console.log(fdata2);
   return fdata2;
 };
 // 所属先名をマージして取得
 const get_id = (array: any[]) => {
-  let gid = array[2];
-  gid = array[4] != '' ? gid + '_' + array[4] : gid;
-  gid = array[6] != '' ? gid + '_' + array[6] : gid;
-  gid = array[8] != '' ? gid + '_' + array[8] : gid;
+  let gid = array[1];
+  gid = array[3] != '' ? gid + '_' + array[3] : gid;
 
   return gid;
+};
+// 所属先名をマージして取得
+const get_name = (array: any[]) => {
+  let gname = array[2];
+  gname = array[4] != '' ? gname + '_' + array[4] : gname;
+
+  return gname;
 };
