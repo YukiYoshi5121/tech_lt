@@ -31,8 +31,8 @@ const get_gdata = (
   // 転置
   fdata = _.unzip(fdata);
 
-  console.log('unzip fdara');
-  console.log(fdata);
+  //console.log('unzip fdara');
+  //console.log(fdata);
 
   let datasets: any = [];
 
@@ -53,9 +53,9 @@ const get_gdata = (
       fill: false,
     });
   }
-  console.log('data');
-  console.log(legends);
-  console.log(gdata);
+  //console.log('data');
+  //console.log(legends);
+  //console.log(gdata);
 
   return gdata;
 };
@@ -91,8 +91,8 @@ const Graph = () => {
     setDataForGraph(forGraph);
   };
 
-  console.log('dataForGraph');
-  console.log(dataForGraph);
+  //console.log('dataForGraph');
+  //console.log(dataForGraph);
 
   // 絞り込み用
   let temp =
