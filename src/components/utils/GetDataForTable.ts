@@ -21,7 +21,7 @@ export const get_data_for_table = (gdata: any[][], ori_header: any[]) => {
     for (const idx in row) {
       tempObj[header[idx]] = row[idx];
     }
-    tempObj['id'] = cnt++;
+    tempObj['key'] = cnt++;
     // 行データobjectを配列に追加
     jsonObj.push(tempObj);
   }
