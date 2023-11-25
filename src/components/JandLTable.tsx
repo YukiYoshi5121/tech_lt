@@ -9,9 +9,7 @@ const { Column } = Table;
 
 //const JandLTable: (dataForTable: any) => JSX.Element = (dataForTable) => {
 const JandLTable = ({ dataForTable, fiscalYears }) => {
-  const [selectedFiscalYear, setSelectedFiscalYear] = useState<any[]>([
-    '2023年度',
-  ]);
+  const [selectedFiscalYear, setSelectedFiscalYear] = useState<any[]>([]);
 
   const isSelected = (item: any) =>
     selectedFiscalYear.includes(item.fiscal_year_name) ||

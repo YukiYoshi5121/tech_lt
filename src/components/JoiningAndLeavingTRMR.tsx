@@ -40,9 +40,13 @@ const Graph = () => {
   // 絞り込み用
   let temp =
     JSON.stringify(dataOrigin) !== '[[]]' ? _.unzip(dataOrigin.slice(1)) : [[]];
-  const groups_yr_all: any[] = Array.from(new Set(temp[7])); //
+  const groups_yr_all: any[] = Array.from(new Set(temp[7])); // 年度
   const groups_jigyo_all: any[] = Array.from(new Set(temp[9])); // 事業本部
   const groups_bu_all: any[] = Array.from(new Set(temp[11])); // 部署
+  console.log('groups_all');
+  console.log(groups_yr_all);
+  console.log(groups_jigyo_all);
+  console.log(groups_bu_all);
 
   // '---': 選択すると、そのレベルの合算が表示されなくなる
   groups_jigyo_all.unshift('---');
@@ -54,10 +58,10 @@ const Graph = () => {
 
   // ファイル入力からおおまかに調整
   const dataOrganized: any[][] = get_organized(dataOrigin);
-  //console.log('dataOrigin');
-  //console.log(dataOrigin);
-  //console.log('dataOrganized');
-  //console.log(dataOrganized);
+  console.log('dataOrigin');
+  console.log(dataOrigin);
+  console.log('dataOrganized');
+  console.log(dataOrganized);
 
   // フィルタリング
   const dataFiltered: any[] = get_filterd(
@@ -66,20 +70,20 @@ const Graph = () => {
     selectedGroupsB,
     selectedGroupsY
   );
-  //console.log('dataFiltered');
-  //console.log(dataFiltered);
+  console.log('dataFiltered');
+  console.log(dataFiltered);
 
   // グラフ用に整形
   const dataForGraph: any[] = get_data_for_graph(dataFiltered);
-  //console.log('dataForGraph');
-  //console.log(dataForGraph);
+  console.log('dataForGraph');
+  console.log(dataForGraph);
 
   // テーブル用にJson形式に変換
   const dataForTable: any = get_data_for_table(dataFiltered, dataOrigin[0]);
   // 年度s
   const fiscal_years: string[] = uniqString(_.unzip(dataForGraph)[0]).reverse();
-  //console.log('dataForTable');
-  //console.log(dataForTable);
+  console.log('dataForTable');
+  console.log(dataForTable);
 
   return (
     <>
