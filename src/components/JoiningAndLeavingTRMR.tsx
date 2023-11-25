@@ -41,6 +41,7 @@ const Graph = () => {
   let temp =
     JSON.stringify(dataOrigin) !== '[[]]' ? _.unzip(dataOrigin.slice(1)) : [[]];
   const groups_yr_all: any[] = Array.from(new Set(temp[7])); // 年度
+  groups_yr_all.sort().reverse();
   const groups_jigyo_all: any[] = Array.from(new Set(temp[9])); // 事業本部
   const groups_bu_all: any[] = Array.from(new Set(temp[11])); // 部署
   console.log('groups_all');
@@ -113,7 +114,7 @@ const Graph = () => {
                     onValueChange={setSelectedGroupsY}
                     placeholder='年度を選択...'
                   >
-                    {groups_yr_all.reverse().filter(Boolean).map((group, i) => (
+                    {groups_yr_all.filter(Boolean).map((group, i) => (
                       <MultiSelectItem key={i} value={group}>
                         {group}
                       </MultiSelectItem>
