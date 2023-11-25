@@ -40,9 +40,9 @@ const Graph = () => {
   // 絞り込み用
   let temp =
     JSON.stringify(dataOrigin) !== '[[]]' ? _.unzip(dataOrigin.slice(1)) : [[]];
-  const groups_yr_all: any[] = Array.from(new Set(temp[6])); //
-  const groups_jigyo_all: any[] = Array.from(new Set(temp[8])); // 事業本部
-  const groups_bu_all: any[] = Array.from(new Set(temp[10])); // 部署
+  const groups_yr_all: any[] = Array.from(new Set(temp[7])); //
+  const groups_jigyo_all: any[] = Array.from(new Set(temp[9])); // 事業本部
+  const groups_bu_all: any[] = Array.from(new Set(temp[11])); // 部署
 
   // '---': 選択すると、そのレベルの合算が表示されなくなる
   groups_jigyo_all.unshift('---');
@@ -89,7 +89,7 @@ const Graph = () => {
         decorationColor='indigo'
       >
         <Grid numItems={1} numItemsSm={6} numItemsLg={6} className='gap-2 '>
-          <Col numColSpan={1} numColSpanLg={6}>
+          <Col numColSpan={1} numColSpanLg={6} className='z-20'>
             <Card
               decoration='top'
               decorationColor='indigo'
@@ -102,12 +102,27 @@ const Graph = () => {
                 className='gap-2 '
               >
                 <Col numColSpan={1} numColSpanLg={1}>
+                  <Text className='font-bold'>年度</Text>
+                  <MultiSelect
+                    className='max-w-full sm:max-w-xs'
+                    value={selectedGroupsY}
+                    onValueChange={setSelectedGroupsY}
+                    placeholder='年度を選択...'
+                  >
+                    {groups_yr_all.reverse().filter(Boolean).map((group, i) => (
+                      <MultiSelectItem key={i} value={group}>
+                        {group}
+                      </MultiSelectItem>
+                    ))}
+                  </MultiSelect>
+                </Col>
+                <Col numColSpan={1} numColSpanLg={1}>
                   <Text className='font-bold'>事業本部</Text>
                   <MultiSelect
                     className='max-w-full sm:max-w-xs'
                     value={selectedGroupsJ}
                     onValueChange={setSelectedGroupsJ}
-                    placeholder='Select Groups...'
+                    placeholder='事業本部を選択...'
                   >
                     {groups_jigyo_all.filter(Boolean).map((group, i) => (
                       <MultiSelectItem key={i} value={group}>
@@ -122,7 +137,7 @@ const Graph = () => {
                     className='max-w-full sm:max-w-xs'
                     value={selectedGroupsB}
                     onValueChange={setSelectedGroupsB}
-                    placeholder='Select Groups...'
+                    placeholder='部署を選択...'
                   >
                     {groups_bu_all.filter(Boolean).map((group, i) => (
                       <MultiSelectItem key={i} value={group}>
@@ -131,7 +146,6 @@ const Graph = () => {
                     ))}
                   </MultiSelect>
                 </Col>
-                <Col numColSpan={1} numColSpanLg={1}></Col>
                 <Col numColSpan={1} numColSpanLg={1}>
                   <CSVReader inputDataOrigin={inputDataOrigin} />
                 </Col>
@@ -139,14 +153,14 @@ const Graph = () => {
             </Card>
           </Col>
 
-          <Col numColSpan={1} numColSpanLg={3}>
+          <Col numColSpan={1} numColSpanLg={3} className='z-10'>
             <BarChartSample
               dataForGraph={dataForGraph}
               type={0}
               name={'在籍者(年度末時点)'}
             />
           </Col>
-          <Col numColSpan={1} numColSpanLg={3}>
+          <Col numColSpan={1} numColSpanLg={3} className='z-10'>
             <BarChartSample
               dataForGraph={dataForGraph}
               type={1}

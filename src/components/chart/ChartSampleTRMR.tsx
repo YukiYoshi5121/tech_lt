@@ -1,6 +1,5 @@
-import { BarChart, Card, Title, Color, Switch } from '@tremor/react';
+import { BarChart, Card, Title, Color } from '@tremor/react';
 import React from 'react';
-import { useState } from 'react';
 import _ from 'lodash';
 
 interface Obj {
@@ -55,7 +54,6 @@ export const BarChartSample = ({ dataForGraph, type, name }) => {
     'fuchsia',
     'pink',
   ];
-  const [value, setValue] = useState(true);
   return (
     <>
       <Card decoration='top' decorationColor='indigo'>
@@ -68,20 +66,10 @@ export const BarChartSample = ({ dataForGraph, type, name }) => {
             categories={catedories}
             colors={seriesColor}
             yAxisWidth={30}
-            enableLegendSlider={value}
+            enableLegendSlider={true}
             showAnimation={true}
             allowDecimals={false}
           />
-        </div>
-        <div className='p-3 bg-gray-50 border-t flex items-center space-x-3 rounded-b-lg'>
-          <Switch
-            id='switch'
-            checked={value}
-            onChange={() => setValue(!value)}
-          />
-          <label className='text-sm text-slate-500' htmlFor='switch'>
-            Enable Legend Slider
-          </label>
         </div>
       </Card>
     </>

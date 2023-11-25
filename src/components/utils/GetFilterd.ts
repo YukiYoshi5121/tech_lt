@@ -10,7 +10,7 @@ export const get_filterd = (
   // 年度
   if (group_y.length > 0) {
     filterd = filterd.filter((el: any) => {
-      return group_y.includes(el[0]);
+      return group_y.includes(el[1]);
     });
   }
 
@@ -18,12 +18,12 @@ export const get_filterd = (
   if (group_j.length != 0) {
     if (group_j.includes('---')) {
       filterd = filterd.filter((el: any) => {
-        return !(el[2] != '' && el[4] == '');
+        return !(el[3] != '' && el[5] == '');
       });
     }
     if (group_j.length > 1 || !group_j.includes('---')) {
       filterd = filterd.filter((el: any) => {
-        return group_j.includes(el[2]);
+        return group_j.includes(el[3]);
       });
     }
   }
@@ -31,12 +31,12 @@ export const get_filterd = (
   if (group_b.length != 0) {
     if (group_b.includes('---')) {
       filterd = filterd.filter((el: any) => {
-        return !(el[4] != '');
+        return !(el[5] != '');
       });
     }
     if (group_b.length > 1 || !group_b.includes('---')) {
       filterd = filterd.filter((el: any) => {
-        return group_b.includes(el[4]);
+        return group_b.includes(el[5]);
       });
     }
   }

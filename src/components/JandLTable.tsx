@@ -40,7 +40,8 @@ const JandLTable = ({ dataForTable, fiscalYears }) => {
       <Table
         className='mt-6 rounded-lg'
         dataSource={dataForTable.filter((item) => isSelected(item))}
-        virtual={false}
+        pagination={{ position: ['topLeft'] }}
+        bordered={true}
       >
         <Column
           title='年度'
