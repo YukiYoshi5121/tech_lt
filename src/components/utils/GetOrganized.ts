@@ -6,10 +6,10 @@ export const get_organized = (origin: any[][]) => {
   const sorted = origin.sort((a, b) => {
     if (a[6] < b[6]) return -1;
     if (a[6] > b[6]) return 1;
-    if (a[7] < b[7]) return -1;
-    if (a[7] > b[7]) return 1;
-    if (a[9] < b[9]) return -1;
-    if (a[9] > b[9]) return 1;
+    if (a[8] < b[8]) return -1;
+    if (a[8] > b[8]) return 1;
+    if (a[10] < b[10]) return -1;
+    if (a[10] > b[10]) return 1;
     return 0;
   });
 
@@ -30,20 +30,20 @@ export const get_organized = (origin: any[][]) => {
     // 年度の変換
     //temp[6] = temp[6].replace(/fy(\d{2})/, '20$1年度');
 
-    if (temp[6] == prev_y && temp[7] == prev_j && temp[9] == prev_b) continue; // 部署情報が同一の場合
+    if (temp[6] == prev_y && temp[8] == prev_j && temp[10] == prev_b) continue; // 部署情報が同一の場合
 
     // 部署情報保存
-    (prev_y = temp[6]), (prev_j = temp[7]), (prev_b = temp[9]);
+    (prev_y = temp[6]), (prev_j = temp[8]), (prev_b = temp[10]);
 
     // 事業本部
     // 部/室がない最初の行にまとめる
     if (prev_j != '' && prev_b == '') {
       // 処理行から数え上げ
       count_end = sorted.filter((el: any) => {
-        return el[6] == prev_y && el[7] == prev_j && el[3] == 0;
+        return el[6] == prev_y && el[8] == prev_j && el[3] == 0;
       }).length;
       count_leave = sorted.filter((el: any) => {
-        return el[6] == prev_y && el[7] == prev_j && el[3] == 1;
+        return el[6] == prev_y && el[8] == prev_j && el[3] == 1;
       }).length;
     }
     // 事業本部、部/室
@@ -52,12 +52,12 @@ export const get_organized = (origin: any[][]) => {
       // 処理行から数え上げ
       count_end = sorted.filter((el: any) => {
         return (
-          el[6] == prev_y && el[7] == prev_j && el[9] == prev_b && el[3] == 0
+          el[6] == prev_y && el[8] == prev_j && el[10] == prev_b && el[3] == 0
         );
       }).length;
       count_leave = sorted.filter((el: any) => {
         return (
-          el[6] == prev_y && el[7] == prev_j && el[9] == prev_b && el[3] == 1
+          el[6] == prev_y && el[8] == prev_j && el[10] == prev_b && el[3] == 1
         );
       }).length;
     }

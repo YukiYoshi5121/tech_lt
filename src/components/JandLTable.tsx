@@ -5,16 +5,16 @@ import { MultiSelect, MultiSelectItem } from '@tremor/react';
 
 import type { SelectProps } from 'antd';
 import { Table } from 'antd';
-const { Column, } = Table;
-
+const { Column } = Table;
 
 //const JandLTable: (dataForTable: any) => JSX.Element = (dataForTable) => {
 const JandLTable = ({ dataForTable, fiscalYears }) => {
-
-  const [selectedFiscalYear, setSelectedFiscalYear] = useState<any[]>(['fy23']);
+  const [selectedFiscalYear, setSelectedFiscalYear] = useState<any[]>([
+    '2023年度',
+  ]);
 
   const isSelected = (item: any) =>
-    selectedFiscalYear.includes(item.fiscal_year) ||
+    selectedFiscalYear.includes(item.fiscal_year_name) ||
     selectedFiscalYear.length === 0;
 
   const options: SelectProps['options'] = dataForTable;
@@ -40,13 +40,33 @@ const JandLTable = ({ dataForTable, fiscalYears }) => {
       <Table
         className='mt-6 rounded-lg'
         dataSource={dataForTable.filter((item) => isSelected(item))}
-        virtual={true}
+        virtual={false}
       >
-        <Column title="年度" dataIndex="fiscal_year" key="fiscal_year" />
-        <Column title="事業本部" dataIndex="division_name" key="division_name" />
-        <Column title="部署" dataIndex="department_name" key="department_name" />
-        <Column title="在籍者(年度末時点)" dataIndex="count_end" key="count_end" />
-        <Column title="退職者(年度末時点)" dataIndex="count_leave" key="count_leave" />
+        <Column
+          title='年度'
+          dataIndex='fiscal_year_name'
+          key='fiscal_year_name'
+        />
+        <Column
+          title='事業本部'
+          dataIndex='division_name'
+          key='division_name'
+        />
+        <Column
+          title='部署'
+          dataIndex='department_name'
+          key='department_name'
+        />
+        <Column
+          title='在籍者(年度末時点)'
+          dataIndex='count_end'
+          key='count_end'
+        />
+        <Column
+          title='退職者(年度末時点)'
+          dataIndex='count_leave'
+          key='count_leave'
+        />
       </Table>
     </>
   );

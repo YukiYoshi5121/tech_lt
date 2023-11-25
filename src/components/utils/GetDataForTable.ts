@@ -12,7 +12,8 @@ export const get_data_for_table = (gdata: any[][], ori_header: any[]) => {
   let cnt = 0;
 
   for (const row of gdata) {
-    if (row[5].toString() === '0' && row[6].toString() === '0') {
+    // 初めから所属無しは除く
+    if (row[6].toString() === '0' && row[7].toString() === '0') {
       continue;
     }
 
