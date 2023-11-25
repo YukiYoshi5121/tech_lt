@@ -3,6 +3,7 @@
 import React from 'react';
 
 import {
+  Card,
   Text,
   Title,
   Tab,
@@ -19,6 +20,7 @@ import JoiningAndLeaving2 from 'components/JoiningAndLeavingTRMR';
 const App = () => {
   return (
     <>
+    <Card className='p-3 min-w-full'>
       <Title>Dashboard</Title>
       <Text>New job: fix Mr. Gluck&#39;s hazy TV, PDQ!</Text>
       <Text>
@@ -46,6 +48,7 @@ const App = () => {
           </TabPanel>
         </TabPanels>
       </TabGroup>
+    </Card>
     </>
   );
 };

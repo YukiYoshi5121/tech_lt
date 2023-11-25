@@ -25,7 +25,7 @@ const JandLTable = ({ dataForTable, fiscalYears }) => {
           className='max-w-full sm:max-w-xs'
           value={selectedFiscalYear}
           onValueChange={setSelectedFiscalYear}
-          placeholder='Select Groups...'
+          placeholder='年度を選択...'
         >
           {fiscalYears.filter(Boolean).map((group, i) => (
             <MultiSelectItem key={i} value={group}>
