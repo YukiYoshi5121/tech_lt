@@ -26,11 +26,16 @@ const App = () => {
           https://www.tremor.so/
         </a>
       </Text>
+      <Text>
+        <a href='https://ant.design/' target='_blank'>
+          https://ant.design/
+        </a>
+      </Text>
 
       <TabGroup className='mt-6'>
         <TabList>
           <Tab>BarLineTable</Tab>
-          <Tab>JoiningAndLeaving</Tab>
+          <Tab>Joining and Leaving</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
